@@ -1,0 +1,38 @@
+﻿.card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.card {
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    position: relative;
+    margin-bottom: 2rem; /* Aumenta el margen inferior */
+}
+
+
+.card-img-top {
+    height: 200px;
+    object-fit: contain;
+    width: 100%;
+    background-color: #f8f9fa;
+}
+
+.card-body {
+    padding: 1.5rem; /* Aumenta el padding */
+}
+
+
+.card-title {
+    font-size: 1.25rem; /* Aumenta el tamaño de la fuente */
+    margin-bottom: 0.75rem; /* Ajusta el margen inferior */
+}
+
+.card-text {
+    font-size: 1rem; /* Ajusta el tamaño de la fuente para mejorar la legibilidad */
+}
+
+.btn:hover {
+    opacity: 0.8;
+}

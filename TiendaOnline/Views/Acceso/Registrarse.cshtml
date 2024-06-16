@@ -1,0 +1,58 @@
+﻿@model TiendaOnline.ViewModels.UsuarioVM;
+@{
+    ViewData["Title"] = "Registrarse";
+}
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <title>Registrarse</title>
+</head>
+<body>
+    <div class="mt-3 container">
+        <div class="row justify-content-center">
+            <div class="col-md-5">
+                <div class="card shadow">
+                    <div class="card-header">
+                        <h4 class="text-center">Registrarse</h4>
+                    </div>
+                    <div class="card-body">
+                        <form asp-controller="Acceso" asp-action="Registrarse" method="post">
+                            <div class="form-floating mb-2">
+                                <input class="form-control" type="text" id="NombreCompleto" placeholder="Nombre Completo" required asp-for="NombreCompleto" />
+                                <label for="NombreCompleto" class="form-label">Nombre Completo</label>
+                            </div>
+                            <div class="form-floating mb-2">
+                                <input class="form-control" type="text" id="Correo" placeholder="Correo" required asp-for="Correo" />
+                                <label for="Correo" class="form-label">Correo</label>
+                            </div>
+                            <div class="form-floating mb-2">
+                                <input class="form-control" type="password" id="Clave" placeholder="Contraseña" required asp-for="Clave" />
+                                <label for="Clave" class="form-label">Contraseña</label>
+                            </div>
+                            <div class="form-floating mb-2">
+                                <input class="form-control" type="password" id="ConfirmarClave" placeholder="Confirmar Contraseña" asp-for="ConfirmarClave" />
+                                <label for="ConfirmarClave">Confirmar Contraseña</label>
+                            </div>
+                            <div class="d-grid gap-2">
+                                <button class="btn btn-primary" type="submit">Regístrate</button>
+                            </div>
+                            @if (ViewData["Mensaje"] != null)
+                            {
+                                <div class="alert alert-danger mt-2" role="alert">
+                                    @ViewData["Mensaje"]
+                                </div>
+                            }
+                            <p class="mt-2 text-center">¿Ya tienes una cuenta? <a asp-controller="Acceso" asp-action="Login">Iniciar Sesión</a></p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+</body>
+</html>

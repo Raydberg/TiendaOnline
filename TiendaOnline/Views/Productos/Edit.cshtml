@@ -1,0 +1,103 @@
+﻿@model TiendaOnline.Models.ProductoDTO
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<div class="card-header bg-dark">
+    <h3 class="text-white"><strong>Editar Producto <i class="fa-solid fa-cart-shopping"></i></strong></h3>
+</div>
+<hr />
+<div class="row justify-content-center">
+    
+    <div class="col-md-6">
+        <form asp-action="Edit" method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="IdProducto" />
+            <div class="form-group">
+                <label asp-for="Precio" class="control-label">Precio</label>
+                <input asp-for="Precio" class="form-control" />
+                <span asp-validation-for="Precio" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Marca</label>
+                <select id="marcaDropdown" class="form-control" asp-items="ViewBag.Marcas">
+                    <option value="">Seleccione una Marca</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Modelo</label>
+                <select id="modeloDropdown" class="form-control" asp-for="ModeloIDMODELO">
+                    <option value="">Seleccione un Modelo</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="año" class="control-label">Año</label>
+                <input asp-for="año" class="form-control" />
+                <span asp-validation-for="año" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Color" class="control-label"></label>
+                <input asp-for="Color" class="form-control" />
+                <span asp-validation-for="Color" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3">
+                <label class="col-sm-4 col-form-label">Imagen</label>
+                <div class="col-sm-10">
+                    <input class="form-control" asp-for="ArchivoImagen" />
+                    <span asp-validation-for="ArchivoImagen" class="text-danger"></span>
+                </div>
+
+            </div>
+            <div class="form-group d-flex justify-content-between">
+                <button class="btn btn-outline-dark" type="submit">
+                    Editar Producto <i class="fa-solid fa-pen-to-square"></i>
+                </button>
+                <a asp-action="Index" class="btn btn-secondary ml-2">Volver atrás</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+
+    <script>
+        $(document).ready(function () {
+            var initialMarcaId = '@Model.Modelo.MarcaIDMARCA';
+
+            if (initialMarcaId) {
+                $('#marcaDropdown').val(initialMarcaId);
+                cargarModelos(initialMarcaId, '@Model.ModeloIDMODELO');
+            }
+
+            $('#marcaDropdown').change(function () {
+                var marcaId = $(this).val();
+                cargarModelos(marcaId, null);
+            });
+
+            function cargarModelos(marcaId, selectedModeloId) {
+                $("#modeloDropdown").empty().append('<option value="">Seleccione Modelo</option>').prop("disabled", true);
+
+                if (marcaId) {
+                    $.ajax({
+                        url: '/Productos/ObtenerModelos',
+                        type: 'GET',
+                        data: { idMarca: marcaId },
+                        success: function (data) {
+                            $.each(data, function (i, modelo) {
+                                var option = $('<option></option>').attr("value", modelo.idModelo).text(modelo.noM_MODELO);
+                                if (modelo.idModelo == selectedModeloId) {
+                                    option.attr("selected", "selected");
+                                }
+                                $('#modeloDropdown').append(option);
+                            });
+                            $("#modeloDropdown").prop("disabled", false);
+                        }
+                    });
+                }
+            }
+        });
+    </script>
+}

@@ -1,0 +1,67 @@
+﻿@model TiendaOnline.Models.ProductoDTO
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-7">
+            <div class="card">
+                <div class="card-header bg-dark">
+                    <h3 class="text-white"><strong>Crear Nuevo Producto <i class="fa-solid fa-cart-shopping"></i></strong></h3>
+                </div>
+                <div class="card-body">
+                    <form asp-action="Create" method="post" enctype="multipart/form-data">
+                        <div class="form-floating mb-3">
+                            <input asp-for="Precio" class="form-control" id="nro_placa" placeholder=" " />
+                            <label asp-for="Precio" class="control-label" for="nro_placa">Precio</label>
+                            <span asp-validation-for="Precio" class="text-danger"></span>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label class="control-label">Marca</label>
+                            <select id="marcaDropdown" class="form-control" asp-items="ViewBag.Marcas">
+                                <option value="">Seleccione una Marca</option>
+                            </select>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label class="control-label">Modelo</label>
+                            <select id="modeloDropdown" class="form-control" asp-for="ModeloIDMODELO" disabled>
+                                <option value="">Seleccione un Modelo</option>
+                            </select>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input asp-for="año" class="form-control" id="anio" placeholder="" />
+                            <label asp-for="año" class="control-label" for="anio">Año</label>
+                            <span asp-validation-for="año" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input asp-for="Color" class="form-control" id="color" placeholder="" />
+                            <label asp-for="Color" class="control-label" for="color">Color</label>
+                            <span asp-validation-for="Color" class="text-danger"></span>
+                        </div>
+                        <div class="row mb-3">
+                            <label class="col-sm-4 col-form-label">Imagen</label> <br />
+                            <div class="col-sm-10">
+                                <input class="form-control" asp-for="ArchivoImagen" />
+                                <span asp-validation-for="ArchivoImagen" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group d-flex justify-content-between">
+                            <button class="btn btn-outline-dark" type="submit">
+                                Crear Producto <i class="fa-solid fa-plus"></i>
+                            </button>
+                            <a asp-action="Index" class="btn btn-secondary">Volver atrás</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="~/js/Jquery.js"></script>
+}
